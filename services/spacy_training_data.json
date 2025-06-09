@@ -1,0 +1,863 @@
+[
+    [
+        "hello",
+        {
+            "cats": {
+                "greet": 1.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": []
+        }
+    ],
+    [
+        "Hi there",
+        {
+            "cats": {
+                "greet": 1.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": []
+        }
+    ],
+    [
+        "good morning",
+        {
+            "cats": {
+                "greet": 1.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": []
+        }
+    ],
+    [
+        "hey",
+        {
+            "cats": {
+                "greet": 1.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": []
+        }
+    ],
+    [
+        "bye then",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 1.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": []
+        }
+    ],
+    [
+        "see you",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 1.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": []
+        }
+    ],
+    [
+        "thanks a lot",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 1.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": []
+        }
+    ],
+    [
+        "thank you very much",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 1.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": []
+        }
+    ],
+    [
+        "show me apartments in Dubai Marina",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 1.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": [
+                [
+                    22,
+                    34,
+                    "LOCATION"
+                ]
+            ]
+        }
+    ],
+    [
+        "I'm looking for a villa",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 1.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": [
+                [
+                    18,
+                    23,
+                    "PROPERTY_TYPE"
+                ]
+            ]
+        }
+    ],
+    [
+        "find houses near JLT with 3 bedrooms",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 1.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": [
+                [
+                    26,
+                    36,
+                    "NUM_BEDROOMS"
+                ]
+            ]
+        }
+    ],
+    [
+        "any studios for sale?",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 1.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": [
+                [
+                    4,
+                    11,
+                    "PROPERTY_TYPE"
+                ]
+            ]
+        }
+    ],
+    [
+        "search for townhouses in Arjan under 2M",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 1.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": [
+                [
+                    11,
+                    21,
+                    "PROPERTY_TYPE"
+                ]
+            ]
+        }
+    ],
+    [
+        "in Palm Jumeirah",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 1.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": [
+                [
+                    3,
+                    16,
+                    "LOCATION"
+                ]
+            ]
+        }
+    ],
+    [
+        "an apartment please",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 1.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": [
+                [
+                    3,
+                    12,
+                    "PROPERTY_TYPE"
+                ]
+            ]
+        }
+    ],
+    [
+        "my budget is about 1.5 million",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 1.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": [
+                [
+                    19,
+                    30,
+                    "BUDGET"
+                ]
+            ]
+        }
+    ],
+    [
+        "we need 4 beds",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 1.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": [
+                [
+                    8,
+                    14,
+                    "NUM_BEDROOMS"
+                ]
+            ]
+        }
+    ],
+    [
+        "it's for investment",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 1.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": [
+                [
+                    9,
+                    19,
+                    "PURPOSE"
+                ]
+            ]
+        }
+    ],
+    [
+        "with a private pool",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 1.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": [
+                [
+                    7,
+                    19,
+                    "AMENITY_PREFERENCE"
+                ]
+            ]
+        }
+    ],
+    [
+        "and a sea view",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 1.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": [
+                [
+                    6,
+                    14,
+                    "AMENITY_PREFERENCE"
+                ]
+            ]
+        }
+    ],
+    [
+        "must be fully furnished",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 1.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": [
+                [
+                    8,
+                    23,
+                    "AMENITY_PREFERENCE"
+                ]
+            ]
+        }
+    ],
+    [
+        "yes",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 1.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": []
+        }
+    ],
+    [
+        "okay that works",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 1.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": []
+        }
+    ],
+    [
+        "no not that one",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 1.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": []
+        }
+    ],
+    [
+        "wrong",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 1.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": []
+        }
+    ],
+    [
+        "show more results",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 1.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": []
+        }
+    ],
+    [
+        "next set",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 1.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": []
+        }
+    ],
+    [
+        "I like that first option",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 1.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": []
+        }
+    ],
+    [
+        "Tell me more about the apartment in JVC",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 1.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": [
+                [
+                    23,
+                    32,
+                    "PROPERTY_TYPE"
+                ]
+            ]
+        }
+    ],
+    [
+        "can I speak to an agent",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 1.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": []
+        }
+    ],
+    [
+        "connect me with sales",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 1.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": []
+        }
+    ],
+    [
+        "yes give me the details",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 1.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": []
+        }
+    ],
+    [
+        "ok sure contact",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 1.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 0.0
+            },
+            "entities": []
+        }
+    ],
+    [
+        "no thanks not now",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 1.0,
+                "out_of_scope": 0.0
+            },
+            "entities": []
+        }
+    ],
+    [
+        "maybe later then",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 1.0,
+                "out_of_scope": 0.0
+            },
+            "entities": []
+        }
+    ],
+    [
+        "what is the current time",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 1.0
+            },
+            "entities": []
+        }
+    ],
+    [
+        "tell me something funny",
+        {
+            "cats": {
+                "greet": 0.0,
+                "goodbye": 0.0,
+                "thank_you": 0.0,
+                "search_properties_initial": 0.0,
+                "provide_search_criteria": 0.0,
+                "affirm_generic": 0.0,
+                "deny_generic": 0.0,
+                "request_more_results": 0.0,
+                "express_interest_in_shown_property": 0.0,
+                "request_agent_contact_general": 0.0,
+                "accept_agent_contact_offer": 0.0,
+                "decline_agent_contact_offer": 0.0,
+                "out_of_scope": 1.0
+            },
+            "entities": []
+        }
+    ]
+]
