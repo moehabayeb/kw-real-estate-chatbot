@@ -1,4 +1,5 @@
 # C:\xampp\htdocs\ClassWork\Backend\app.py
+import sys
 from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
 from services.nlp_service import process_query
