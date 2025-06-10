@@ -10,7 +10,10 @@ from fuzzywuzzy import process as fuzzy_process
 import openai
 from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
-# NLP SERVICE LOGIC 
+
+# ==============================================================================
+# --- NLP SERVICE LOGIC ---
+# ==============================================================================
 try:
     nlp = spacy.load("en_core_web_sm")
     print("spaCy model (en_core_web_sm) loaded successfully.")
@@ -36,7 +39,9 @@ def process_query(query_text_original_case):
                 break
     return extracted
 
-# SUITABILITY SCORER LOGIC
+# ==============================================================================
+# --- SUITABILITY SCORER LOGIC ---
+# ==============================================================================
 WEIGHTS = {'property_type': 25, 'budget': 30, 'bedrooms': 20}
 def calculate_suitability_score(property_details, user_criteria):
     score, total_weight = 0, 0
@@ -51,8 +56,9 @@ def calculate_suitability_score(property_details, user_criteria):
         if user_criteria['bedrooms'] == property_details['bedrooms']: score += WEIGHTS['bedrooms']
     return round((score / total_weight) * 100, 2) if total_weight > 0 else 0
 
-#  DATABASE LOGIC 
-
+# ==============================================================================
+# --- DATABASE LOGIC ---
+# ==============================================================================
 DATABASE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'properties.db')
 def get_properties(filters):
     try:
@@ -80,21 +86,22 @@ def get_properties(filters):
         return []
 
 # ==============================================================================
-# --- MAIN FLASK APPLICATION (with fixes) ---
+# --- MAIN FLASK APPLICATION ---
 # ==============================================================================
 
 app = Flask(__name__)
 
-# --- ROBUST CORS CONFIGURATION ---
-# This setup is more robust for production servers. It handles all pre-flight requests automatically.
-CORS(app, origins=["https://incredible-sprinkles-9e8229.netlify.app"])
+# --- SIMPLE CORS CONFIGURATION ---
+# This allows connections from all origins, which is perfect for development
+# and for allowing both the web app and mobile WebView app to connect.
+CORS(app)
 # --- END CORS FIX ---
 
+
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
-# All the other constants (SYSTEM_PROMPT, etc.) are going here
 FEEDBACK_TAG = "[ASK_FOR_FEEDBACK]"
 SYSTEM_PROMPT = """You are a world-class conversational AI, acting as a friendly, proactive, and highly capable real estate assistant for Keller Williams Dubai...
-(--- Paste your full, detailed SYSTEM_PROMPT string here ---)"""
+(--- You MUST PASTE your full, detailed SYSTEM_PROMPT string here for the AI to work correctly ---)"""
 
 
 @app.route('/search', methods=['POST'])
@@ -143,7 +150,6 @@ def search():
         print(f"!!! SERVER ERROR in /search: {e}")
         import traceback
         traceback.print_exc()
-        # just s to a user-friendly error message
         return jsonify({"error": "An internal server error occurred."}), 500
 
 def generate_ai_response(user_message, criteria, properties, conversation_history):
@@ -151,7 +157,6 @@ def generate_ai_response(user_message, criteria, properties, conversation_histor
         print("ERROR: OPENAI_API_KEY environment variable is not set on the server.")
         return "Sorry, my AI capabilities are currently offline."
 
-    # Build the prompt
     history_for_prompt = "\n".join([f"{'User' if k=='user' else 'Bot'}: {v}" for turn in conversation_history[-4:] for k, v in turn.items()])
     criteria_summary = ", ".join([f"{k}: {v}" for k, v in criteria.items() if v]) or "None"
     prop_summary = "No properties found matching criteria."
@@ -175,5 +180,6 @@ def generate_ai_response(user_message, criteria, properties, conversation_histor
 
 @app.route('/log_feedback', methods=['POST'])
 def log_feedback():
-    # the feedback logic
+    # This is placeholder logic. A real app would save feedback to a database.
+    print(f"Received feedback: {request.get_json()}")
     return jsonify({"status": "success"})
