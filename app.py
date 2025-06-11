@@ -6,11 +6,11 @@ import sqlite3
 from datetime import datetime
 from math import exp
 
-# imports
+# --- ML Imports ---
 import joblib
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
-#ending  imports
+# --- End ML Imports ---
 
 import spacy
 from fuzzywuzzy import process as fuzzy_process
@@ -18,9 +18,9 @@ import openai
 from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
 
-
-#toLoad the ML Model and encoders startup
-
+# ==============================================================================
+# --- Load ML Model ---
+# ==============================================================================
 try:
     ml_model = joblib.load('ml_suitability_model.joblib')
     label_encoders = joblib.load('ml_label_encoders.joblib')
@@ -31,42 +31,34 @@ except FileNotFoundError:
     print("⚠️ WARNING: ML Suitability model files not found. ML ranking will be disabled.")
 
 
-#ML scoring func
+# ==============================================================================
+# --- ML SCORING FUNCTION ---
+# ==============================================================================
 def calculate_ml_suitability(property_details, user_criteria):
     if not ml_model or not label_encoders:
         return "ML_Model_Unavailable"
     
-    # make a dataframe from the prop. detals
     property_df = pd.DataFrame([property_details])
-    
-   
     features_for_prediction = ['location', 'propertyTy', 'price', 'bedrooms', 'bathrooms']
 
-   
     for col in features_for_prediction:
         if col not in property_df.columns or pd.isna(property_df[col].iloc[0]):
              return "ML_Missing_Data"
-
     try:
-        # Preprocess the data like in the training script
         for column, le in label_encoders.items():
-            # Handle categories that the model has never seen before during training
             value_to_encode = property_df[column].iloc[0]
             if value_to_encode not in le.classes_:
                 return "ML_Unseen_Category"
-            
-            # Use a DataFrame to avoid deprecated warnings
             property_df[column] = le.transform(property_df[[column]])
-
         prediction = ml_model.predict(property_df[features_for_prediction])
-        return prediction[0] 
-
+        return prediction[0]
     except Exception as e:
         print(f"ERROR during ML prediction: {e}")
         return "ML_Prediction_Error"
 
-
-#our nlp service logic:-
+# ==============================================================================
+# --- NLP SERVICE LOGIC ---
+# ==============================================================================
 try:
     nlp = spacy.load("en_core_web_sm")
     print("✅ spaCy model loaded successfully.")
@@ -96,9 +88,9 @@ def process_query(query_text_original_case):
                 break
     return extracted
 
-
-#heuristic suitability scorer logic:-
-
+# ==============================================================================
+# --- HEURISTIC SCORER LOGIC ---
+# ==============================================================================
 WEIGHTS = {'property_type': 25, 'budget': 30, 'bedrooms': 20}
 def calculate_suitability_score(property_details, user_criteria):
     score, total_weight = 0, 0
@@ -113,7 +105,9 @@ def calculate_suitability_score(property_details, user_criteria):
         if user_criteria['bedrooms'] == property_details['bedrooms']: score += WEIGHTS['bedrooms']
     return round((score / total_weight) * 100, 2) if total_weight > 0 else 0
 
-#Databse logic
+# ==============================================================================
+# --- DATABASE LOGIC ---
+# ==============================================================================
 DATABASE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'properties.db')
 def get_properties(filters):
     try:
@@ -140,10 +134,16 @@ def get_properties(filters):
         print(f"DATABASE ERROR: {e}")
         return []
 
-#flask application
+# ==============================================================================
+# --- MAIN FLASK APPLICATION ---
+# ==============================================================================
 
 app = Flask(__name__)
-CORS(app)
+
+# --- MORE ROBUST CORS CONFIGURATION for Production Servers ---
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
+# --- END CORS FIX ---
+
 
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 FEEDBACK_TAG = "[ASK_FOR_FEEDBACK]"
@@ -183,14 +183,10 @@ def search():
         if criteria.get('location') and criteria.get('property_type') and has_new_search_info:
             properties_from_db = get_properties(criteria)
             if properties_from_db:
-                # both scorers
                 for prop in properties_from_db:
-                    # 1. Get the score from your existing heuristic model
                     prop['heuristic_score'] = calculate_suitability_score(prop, criteria)
-                    # 2. Get the prediction from the new ML model
                     prop['ml_suitability'] = calculate_ml_suitability(prop, criteria)
                 
-                # We will still sort by the reliable heuristic score for the user view
                 properties_from_db.sort(key=lambda x: x['heuristic_score'], reverse=True)
 
         ai_response = generate_ai_response(user_message, criteria, properties_from_db, conversation_history)
@@ -212,7 +208,6 @@ def search():
         return jsonify({"error": "An internal server error occurred."}), 500
 
 def generate_ai_response(user_message, criteria, properties, conversation_history):
-    # function is still presents data given to it
     if not OPENAI_API_KEY:
         print("ERROR: OPENAI_API_KEY is not set.")
         return "Sorry, my AI capabilities are currently offline."
