@@ -5,20 +5,73 @@ import json
 import sqlite3
 from datetime import datetime
 from math import exp
+
+# imports
+import joblib
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+#ending  imports
+
 import spacy
 from fuzzywuzzy import process as fuzzy_process
 import openai
 from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
 
-# ==============================================================================
-# --- NLP SERVICE LOGIC (with new "express_interest" intent) ---
-# ==============================================================================
+
+#toLoad the ML Model and encoders startup
+
+try:
+    ml_model = joblib.load('ml_suitability_model.joblib')
+    label_encoders = joblib.load('ml_label_encoders.joblib')
+    print("✅ ML Suitability model and encoders loaded successfully.")
+except FileNotFoundError:
+    ml_model = None
+    label_encoders = None
+    print("⚠️ WARNING: ML Suitability model files not found. ML ranking will be disabled.")
+
+
+#ML scoring func
+def calculate_ml_suitability(property_details, user_criteria):
+    if not ml_model or not label_encoders:
+        return "ML_Model_Unavailable"
+    
+    # make a dataframe from the prop. detals
+    property_df = pd.DataFrame([property_details])
+    
+   
+    features_for_prediction = ['location', 'propertyTy', 'price', 'bedrooms', 'bathrooms']
+
+   
+    for col in features_for_prediction:
+        if col not in property_df.columns or pd.isna(property_df[col].iloc[0]):
+             return "ML_Missing_Data"
+
+    try:
+        # Preprocess the data like in the training script
+        for column, le in label_encoders.items():
+            # Handle categories that the model has never seen before during training
+            value_to_encode = property_df[column].iloc[0]
+            if value_to_encode not in le.classes_:
+                return "ML_Unseen_Category"
+            
+            # Use a DataFrame to avoid deprecated warnings
+            property_df[column] = le.transform(property_df[[column]])
+
+        prediction = ml_model.predict(property_df[features_for_prediction])
+        return prediction[0] 
+
+    except Exception as e:
+        print(f"ERROR during ML prediction: {e}")
+        return "ML_Prediction_Error"
+
+
+#our nlp service logic:-
 try:
     nlp = spacy.load("en_core_web_sm")
-    print("spaCy model (en_core_web_sm) loaded successfully.")
+    print("✅ spaCy model loaded successfully.")
 except Exception as e:
-    print(f"FATAL: Could not load spaCy model: {e}")
+    print(f"❌ FATAL: Could not load spaCy model: {e}")
     nlp = None
 
 KNOWN_LOCATIONS = [ "dubai", "abu dhabi", "sharjah", "jumeirah", "marina", "downtown dubai", "jvc", "palm jumeirah", "business bay" ]
@@ -28,12 +81,9 @@ INTEREST_KEYWORDS = ["like that", "tell me more", "interested in", "i liked", "t
 def process_query(query_text_original_case):
     if not nlp: return {}
     query_lower = query_text_original_case.lower()
-    
-    # --- NEW: Check for interest intent FIRST ---
     if any(keyword in query_lower for keyword in INTEREST_KEYWORDS):
         return {"intent": "express_interest"}
     
-    # --- Existing logic continues if it's not an interest expression ---
     extracted = {'location': None, 'property_type': None, 'budget': None, 'bedrooms': None, "intent": "search_properties"}
     for loc in KNOWN_LOCATIONS:
         if loc in query_lower:
@@ -44,12 +94,11 @@ def process_query(query_text_original_case):
             if syn in query_lower:
                 extracted['property_type'] = p_type
                 break
-    # Add other extraction logic here (budget, bedrooms, etc.)
     return extracted
 
-# ==============================================================================
-# --- SUITABILITY SCORER LOGIC (Unchanged) ---
-# ==============================================================================
+
+#heuristic suitability scorer logic:-
+
 WEIGHTS = {'property_type': 25, 'budget': 30, 'bedrooms': 20}
 def calculate_suitability_score(property_details, user_criteria):
     score, total_weight = 0, 0
@@ -64,9 +113,7 @@ def calculate_suitability_score(property_details, user_criteria):
         if user_criteria['bedrooms'] == property_details['bedrooms']: score += WEIGHTS['bedrooms']
     return round((score / total_weight) * 100, 2) if total_weight > 0 else 0
 
-# ==============================================================================
-# --- DATABASE LOGIC (Unchanged) ---
-# ==============================================================================
+#Databse logic
 DATABASE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'properties.db')
 def get_properties(filters):
     try:
@@ -93,30 +140,16 @@ def get_properties(filters):
         print(f"DATABASE ERROR: {e}")
         return []
 
-# ==============================================================================
-# --- MAIN FLASK APPLICATION ---
-# ==============================================================================
+#flask application
 
 app = Flask(__name__)
 CORS(app)
 
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 FEEDBACK_TAG = "[ASK_FOR_FEEDBACK]"
+SYSTEM_PROMPT = """You are a world-class conversational AI, acting as a friendly, proactive, and highly capable real estate assistant for Keller Williams Dubai...
+(--- Paste your full, detailed SYSTEM_PROMPT string here ---)"""
 
-# --- REFINED SYSTEM PROMPT with new rule ---
-SYSTEM_PROMPT = """You are a world-class conversational AI, acting as a friendly, proactive, and highly capable real estate assistant for Keller Williams Dubai.
-
-Your Core Directives:
-- You MUST politely decline any off-topic questions (like trivia or jokes) and redirect to real estate.
-- Use conversation history to stay in context.
-
-Your "Conversational Toolkit":
-1.  If the user provides new search criteria: Acknowledge it and present the new search results.
-2.  If the user gives a vague response (e.g., "ok cool") after you've shown properties: Ask a specific question about those properties to guide them, like "Great, did any of those options catch your eye?".
-3.  If the user expresses interest in a specific property you just showed: Acknowledge their choice, confirm which one they mean, and offer to connect them with an agent for more details or to schedule a viewing.
-4.  If there are no properties to discuss: Ask a clarifying question to get more search criteria.
-5.  If the user says goodbye or thanks: Conclude politely and add the [ASK_FOR_FEEDBACK] tag.
-"""
 
 @app.route('/search', methods=['POST'])
 def search():
@@ -133,19 +166,16 @@ def search():
             return jsonify({ "bot_dialogue_message": ai_response, "search_results": [], "current_search_criteria_for_frontend": {}, "ask_for_feedback": False })
 
         nlp_results = process_query(user_message)
-
-        # --- NEW LOGIC: Check for the interest intent first ---
+        
         if nlp_results.get("intent") == "express_interest":
-            print("User expressed interest. Skipping search and generating contextual response.")
-            # We send an empty properties list so the AI knows not to list them again.
+            print("User expressed interest. Skipping search.")
             ai_response = generate_ai_response(user_message, criteria, [], conversation_history)
             return jsonify({"bot_dialogue_message": ai_response, "search_results": [], "current_search_criteria_for_frontend": criteria, "ask_for_feedback": False})
 
-        # --- Existing logic continues if it's a search query ---
         has_new_search_info = any(nlp_results.get(key) for key in ['location', 'property_type', 'bedrooms', 'budget'])
         
         if has_new_search_info:
-            print("New substantive criteria found in user message.")
+            print("New search criteria found.")
             for key, value in nlp_results.items():
                 if value is not None: criteria[key] = value
 
@@ -153,9 +183,15 @@ def search():
         if criteria.get('location') and criteria.get('property_type') and has_new_search_info:
             properties_from_db = get_properties(criteria)
             if properties_from_db:
+                # both scorers
                 for prop in properties_from_db:
-                    prop['suitability_score'] = calculate_suitability_score(prop, criteria)
-                properties_from_db.sort(key=lambda x: x['suitability_score'], reverse=True)
+                    # 1. Get the score from your existing heuristic model
+                    prop['heuristic_score'] = calculate_suitability_score(prop, criteria)
+                    # 2. Get the prediction from the new ML model
+                    prop['ml_suitability'] = calculate_ml_suitability(prop, criteria)
+                
+                # We will still sort by the reliable heuristic score for the user view
+                properties_from_db.sort(key=lambda x: x['heuristic_score'], reverse=True)
 
         ai_response = generate_ai_response(user_message, criteria, properties_from_db, conversation_history)
         
@@ -176,8 +212,9 @@ def search():
         return jsonify({"error": "An internal server error occurred."}), 500
 
 def generate_ai_response(user_message, criteria, properties, conversation_history):
+    # function is still presents data given to it
     if not OPENAI_API_KEY:
-        print("ERROR: OPENAI_API_KEY environment variable is not set on the server.")
+        print("ERROR: OPENAI_API_KEY is not set.")
         return "Sorry, my AI capabilities are currently offline."
 
     history_for_prompt = "\n".join([f"{'User' if k=='user' else 'Bot'}: {v}" for turn in conversation_history[-4:] for k, v in turn.items()])
